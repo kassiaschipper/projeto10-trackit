@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const BASE_URL =
-  "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit";
+const BASE_URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit";
 
 function postRegistration(body) {
   const promise = axios.post(`${BASE_URL}/auth/sign-up`, body);
@@ -9,44 +8,70 @@ function postRegistration(body) {
 }
 
 function postLogin(body) {
-    const promise = axios.post(`${BASE_URL}/auth/login`, body);
-    return promise;
-  }
-
-function postCreatHabit(body){
-    const promise = axios.post(`${BASE_URL}/habits`, body);
-    return promise;
+  const promise = axios.post(`${BASE_URL}/auth/login`, body);
+  return promise;
 }
 
+function postCreatHabit(body) {
+  const config = createHeaders();
+  const promise = axios.post(`${BASE_URL}/habits`, body, config);
+  return promise;
+}
 
 function getListHabits() {
-  const promise = axios.get(`${BASE_URL}/habits`);
+  const config = createHeaders();
+  const promise = axios.get(`${BASE_URL}/habits`, config);
   return promise;
 }
 
 function getDeletHabit(habitId) {
-  const promise = axios.get(`${BASE_URL}/habits/${habitId}`);
+  const config = createHeaders();
+  const promise = axios.get(`${BASE_URL}/habits/${habitId}`, config);
   return promise;
 }
 function getTodaytHabits() {
-    const promise = axios.get(`${BASE_URL}/habits/today`); 
-    return promise;
-  }
-
-  function postHabitDone(habitId, body){
-    const promise = axios.post(`${BASE_URL}/habits/${habitId}/check`, body);
-    return promise;
+  const config = createHeaders();
+  const promise = axios.get(`${BASE_URL}/habits/today`, config);
+  return promise;
 }
-function postHabitUndone(habitId, body){
-    const promise = axios.post(`${BASE_URL}/habits/${habitId}/uncheck`, body);
-    return promise;
+
+function postHabitDone(habitId) {
+  const config = createHeaders();
+  const promise = axios.post(`${BASE_URL}/habits/${habitId}/check`, config);
+  return promise;
+}
+function postHabitUndone(habitId) {
+  const config = createHeaders();
+  const promise = axios.post(`${BASE_URL}/habits/${habitId}/uncheck`, config);
+  return promise;
 }
 
 function getHabitHistoric() {
-    const promise = axios.get(`${BASE_URL}/habits/history/daily`);
-    return promise;
-  }
+  const config = createHeaders();
+  const promise = axios.get(`${BASE_URL}/habits/history/daily`, config);
+  return promise;
+}
 
+function createHeaders() {
+  const auth = JSON.parse(localStorage.getItem("trackit"));
+  const config = {
+    headers: {
+      Authorization: `Bearer ${auth.token}`,
+    },
+  };
 
+  return config;
+}
 
-export { postRegistration, postLogin, postCreatHabit, getListHabits, getDeletHabit, getTodaytHabits, postHabitDone, postHabitUndone, getHabitHistoric};
+export {
+  postRegistration,
+  postLogin,
+  postCreatHabit,
+  getListHabits,
+  getDeletHabit,
+  getTodaytHabits,
+  postHabitDone,
+  postHabitUndone,
+  getHabitHistoric,
+  createHeader,
+};
