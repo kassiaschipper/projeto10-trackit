@@ -1,39 +1,46 @@
 import styled from "styled-components";
-import axios from "axios";
 import logo from "../../assets/images/logo.png";
 import { useState } from "react";
 import { postLogin } from "../../services/trackIt";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { ThreeDots } from "react-loader-spinner";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   function handleForm(e) {
     e.preventDefault();
+    setLoading(true);
     const body = {
       email,
       password,
     };
-    
+
     postLogin(body).then((response) => {
       console.log(response.data);
+   
+      const token = response.data.token;
+      const image = response.data.image;
+      const authJSON = JSON.stringify({ token: token, image: image });
+      localStorage.setItem('trackit', authJSON);
+   
+      //navigate("/hoje");
       navigate("/habitos")
-    });
-    
-    postLogin(body).catch((err) => 
-    {
-        console.log(err.response);
-        alert("E-mail ou senha incorretos. Tente novamente.")
     })
- }
+    postLogin(body).catch((err) => {
+      console.log(err.response);
+      setLoading(false);
+      alert("E-mail ou senha incorretos. Tente novamente.");
+    });
+  }
 
   return (
     <Content>
       <div>
         {" "}
-
         <img src={logo} />{" "}
       </div>
       <div>
@@ -43,6 +50,7 @@ export default function LoginPage() {
             placeholder="email"
             type="email"
             value={email}
+            disabled={loading === false ? false : true}
             onChange={(e) => setEmail(e.target.value)}
             required
           ></input>
@@ -52,12 +60,19 @@ export default function LoginPage() {
             placeholder="senha"
             type="password"
             value={password}
+            disabled={loading === false ? false : true}
             onChange={(e) => setPassword(e.target.value)}
             required
           ></input>
 
-          <button type="submit">Entrar</button>
-          <span onClick={() => navigate("/cadastro")}>Não tem uma conta? Cadastre-se!</span>
+          <button  disabled={loading === false ? false : true} type="submit"> {loading ? (
+                            <ThreeDots color="#FFFFFF" height={13} aling="center" />
+                        ) : (
+                            'Entrar'
+                        )}</button>
+          <span onClick={() => navigate("/cadastro")}>
+            Não tem uma conta? Cadastre-se!
+          </span>
         </form>
       </div>
     </Content>

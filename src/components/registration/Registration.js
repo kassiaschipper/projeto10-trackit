@@ -2,35 +2,36 @@ import styled from "styled-components";
 import logo from "../../assets/images/logo.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-import { postRegistration } from "../../services/trackIt"
+import { postRegistration } from "../../services/trackIt";
+import { ThreeDots } from "react-loader-spinner";
 
 export default function Registration() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
- 
-function handleForm(event){
+
+  function handleForm(event) {
     event.preventDefault();
-    const body={
-        email,
-        password,
-        name,
-        image,
-    }
+    const body = {
+      email,
+      password,
+      name,
+      image,
+    };
     console.log(body);
 
-    postRegistration(body).then((response) => 
-    {console.log(response.data);
-    navigate("/");
-    })
-    postRegistration(body).catch((err) => {
-        alert("Erro ao enviar os dados!");
-    })
-    
-}
+    postRegistration(body).then((response) => {
+      console.log(response.data);
+      setLoading(true);
+      navigate("/");
+    }).catch((err) => {
+      setLoading(false);
+      alert("Erro ao enviar os dados!");
+    });
+  }
   return (
     <Content>
       <div>
@@ -42,9 +43,11 @@ function handleForm(event){
             placeholder="email"
             type="email"
             value={email}
-            onChange={(e) => 
-                {setEmail(e.target.value)
-                console.log(e.target.value)}}
+            disabled={loading ? true : false}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              console.log(e.target.value);
+            }}
             required
           ></input>
 
@@ -53,6 +56,7 @@ function handleForm(event){
             placeholder="senha"
             type="password"
             value={password}
+            disabled={loading ? true : false}
             onChange={(e) => setPassword(e.target.value)}
             required
           ></input>
@@ -62,6 +66,7 @@ function handleForm(event){
             placeholder="nome"
             type="text"
             value={name}
+            disabled={loading ? true : false}
             onChange={(e) => setName(e.target.value)}
             required
           ></input>
@@ -71,12 +76,21 @@ function handleForm(event){
             placeholder="foto"
             type="url"
             value={image}
+            disabled={loading ? true : false}
             onChange={(e) => setImage(e.target.value)}
             required
           ></input>
 
-          <button type="submit">cadastrar</button>
-          <span onClick={() => navigate("/")}>Já tem uma conta? Faça login!</span>
+          <button type="submit">
+          {loading ? (
+                            <ThreeDots color="#FFFFFF" height={13} aling="center" />
+                        ) : (
+                            'Entrar'
+                        )}
+          </button>
+          <span onClick={() => navigate("/")}>
+            Já tem uma conta? Faça login!
+          </span>
         </form>
       </div>
     </Content>

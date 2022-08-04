@@ -73,5 +73,5 @@ export {
   postHabitDone,
   postHabitUndone,
   getHabitHistoric,
-  createHeader,
+  createHeaders,
 };
