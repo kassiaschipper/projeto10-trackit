@@ -7,11 +7,12 @@ import Today from "./today/Today";
 import History from "./history/History";
 import PrivatePage from "./privatePage/PrivatePage";
 
+
 export default function App() {
-  return (
+
+    return (
     <>
       <GlobalStyle />
-
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginPage />} />
