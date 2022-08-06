@@ -1,12 +1,22 @@
+import { useState } from "react";
+import { ThreeDots } from "react-loader-spinner";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import HabitForm from "../habitForm/HabitForm";
 
 export default function Habits() {
-  return (
+  const [habits, setHabits] = useState([]);
+  const [addHabit, setAddHabite] = useState(false);
+
+ 
+
+  return habits.length === 0 ? (
     <ContainerWrapper>
       <SubTitleWrapper>
         <div>Meus hábitos</div>
         <button>+</button>
       </SubTitleWrapper>
+      <HabitForm />
       <TextWrapper>
         <p>
           Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
@@ -14,25 +24,25 @@ export default function Habits() {
         </p>
       </TextWrapper>
     </ContainerWrapper>
+  ) : (
+    <>
+      <div>teste</div>
+    </>
   );
 }
 // onClick={() => setNewHabit(true)}
 
 const ContainerWrapper = styled.body`
-  
-   @media (max-width: 614px) {
+  @media (max-width: 614px) {
     * {
       box-sizing: border-box;
     }
     position: fixed;
-    top:74px;
+    top: 74px;
     width: 100%;
     height: 100%;
-    background-color: #E5E5E5;
-   
-  
-}
-
+    background-color: #e5e5e5;
+  }
 `;
 const SubTitleWrapper = styled.div`
   @media (max-width: 614px) {
@@ -44,9 +54,9 @@ const SubTitleWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    position: fixed;
+    position: relative;
     left: 0;
-    top: 70px;
+    top: 0;
     margin-left: 16px;
     margin-top: 28px;
 
@@ -55,12 +65,12 @@ const SubTitleWrapper = styled.div`
     font-weight: 400;
     font-size: 22.976px;
     line-height: 29px;
-    background-color: #E5E5E5;
+    background-color: #e5e5e5;
 
     color: #126ba5;
 
     button {
-      margin-right: 28px;
+      margin-right: 38px;
       width: 40px;
       height: 35px;
       left: 317px;
@@ -70,6 +80,8 @@ const SubTitleWrapper = styled.div`
       border-radius: 4.63636px;
       border: none;
       color: white;
+      font-weight: 400;
+      font-size: 27px;
     }
   }
 `;
@@ -79,11 +91,11 @@ const TextWrapper = styled.div`
     * {
       box-sizing: border-box;
     }
-    position: fixed;
+    position: relative;
     width: 338px;
     height: 74px;
-    left: 17px;
-    top: 155px;
+    left: 7%;
+    top: 0;
 
     font-family: "Lexend Deca";
     font-style: normal;
@@ -91,6 +103,7 @@ const TextWrapper = styled.div`
     font-size: 17.976px;
     line-height: 22px;
 
+    margin-top: 28px;
     color: #666666;
   }
 `;
