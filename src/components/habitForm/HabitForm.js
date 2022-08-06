@@ -1,11 +1,13 @@
-import { CanceledError } from "axios";
 import { useState } from "react";
 import styled from "styled-components";
 import { postCreatHabit } from "../../services/trackIt";
 
-export default function HabitForm() {
+
+export default function HabitForm({setShowHabitBox}) {
   const [name, setName] = useState("");
  
+
+  
 
   return (
     <FormWrapped>
@@ -31,7 +33,7 @@ export default function HabitForm() {
           </ul>
         </>
         <Button>
-          <p>Cancelar</p>
+          <p onClick={() => setShowHabitBox(false)}>Cancelar</p>
           <button>Salvar</button>
         </Button>
       </div>

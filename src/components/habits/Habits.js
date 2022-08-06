@@ -6,7 +6,7 @@ import HabitForm from "../habitForm/HabitForm";
 
 export default function Habits() {
   const [habits, setHabits] = useState([]);
-  const [addHabit, setAddHabite] = useState(false);
+  const [showHabitBox, setShowHabitBox] = useState(false);
 
  
 
@@ -14,9 +14,10 @@ export default function Habits() {
     <ContainerWrapper>
       <SubTitleWrapper>
         <div>Meus hábitos</div>
-        <button>+</button>
+        <button onClick={() => setShowHabitBox(true)}>+</button>
       </SubTitleWrapper>
-      <HabitForm />
+      {showHabitBox ? <HabitForm setShowHabitBox={setShowHabitBox}/> : ''}
+      
       <TextWrapper>
         <p>
           Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
@@ -30,7 +31,7 @@ export default function Habits() {
     </>
   );
 }
-// onClick={() => setNewHabit(true)}
+
 
 const ContainerWrapper = styled.body`
   @media (max-width: 614px) {
