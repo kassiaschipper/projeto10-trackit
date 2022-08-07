@@ -21,10 +21,10 @@ export default function Registration() {
       name,
       image,
     };
-    console.log(body);
+    
 
     postRegistration(body).then((response) => {
-      console.log(response.data);
+      
       setLoading(true);
       navigate("/");
     }).catch((err) => {
@@ -46,7 +46,7 @@ export default function Registration() {
             disabled={loading ? true : false}
             onChange={(e) => {
               setEmail(e.target.value);
-              console.log(e.target.value);
+           
             }}
             required
           ></input>

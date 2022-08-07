@@ -1,37 +1,69 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import HabitForm from "../habitForm/HabitForm";
+import { getListHabits, deleteHabit } from "../../services/trackIt";
+import HabitItem from "./HabitItem";
 
 export default function Habits() {
   const [habits, setHabits] = useState([]);
   const [showHabitBox, setShowHabitBox] = useState(false);
+  //const [renderHabit, setRenderHabit] = useState(true);
 
+  useEffect(() => {
+    handleGetHabits();
+  }, []);
+
+  function handleGetHabits() {
+    getListHabits()
+      .then((response) => {
  
+        setHabits(response.data);
+        //renderHabit
+      })
+      .catch((err) => {
+        alert("Erro ao listar hábitos");
+      });
+  }
 
-  return habits.length === 0 ? (
+  function habitDelete(habitId) {
+    
+      deleteHabit(habitId).then(() => {
+        handleGetHabits();
+      });
+    
+  }
+
+  return (
     <ContainerWrapper>
       <SubTitleWrapper>
         <div>Meus hábitos</div>
         <button onClick={() => setShowHabitBox(true)}>+</button>
       </SubTitleWrapper>
-      {showHabitBox ? <HabitForm setShowHabitBox={setShowHabitBox}/> : ''}
-      
-      <TextWrapper>
-        <p>
-          Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
-          começar a trackear!
-        </p>
-      </TextWrapper>
+      {showHabitBox ? (
+        <HabitForm
+          handleGetHabits={handleGetHabits}
+          setShowHabitBox={setShowHabitBox}
+        />
+      ) : (
+        ""
+      )}
+      {habits.length === 0 ? (
+        <TextWrapper>
+          <p>
+            Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
+            começar a trackear!
+          </p>
+        </TextWrapper>
+      ) : (
+        habits.map((value) => (
+          <HabitItem item={value} onDelete={habitDelete} habitId={value.id} />
+        ))
+      )}
     </ContainerWrapper>
-  ) : (
-    <>
-      <div>teste</div>
-    </>
   );
 }
-
 
 const ContainerWrapper = styled.body`
   @media (max-width: 614px) {
@@ -43,6 +75,7 @@ const ContainerWrapper = styled.body`
     width: 100%;
     height: 100%;
     background-color: #e5e5e5;
+    overflow-y: scroll;
   }
 `;
 const SubTitleWrapper = styled.div`
@@ -55,9 +88,12 @@ const SubTitleWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    position: relative;
+
+    height: 70px;
+    position: fixed;
     left: 0;
-    top: 0;
+    top: 44px;
+    z-index: 1;
     margin-left: 16px;
     margin-top: 28px;
 
@@ -96,7 +132,7 @@ const TextWrapper = styled.div`
     width: 338px;
     height: 74px;
     left: 7%;
-    top: 0;
+    top: 10%;
 
     font-family: "Lexend Deca";
     font-style: normal;

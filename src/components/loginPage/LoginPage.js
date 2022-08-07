@@ -20,7 +20,7 @@ export default function LoginPage() {
     };
 
     postLogin(body).then((response) => {
-      console.log(response.data);
+     
    
       const token = response.data.token;
       const image = response.data.image;
@@ -28,10 +28,11 @@ export default function LoginPage() {
       localStorage.setItem('trackit', authJSON);
    
       //navigate("/hoje");
+      
       navigate("/habitos")
     })
     postLogin(body).catch((err) => {
-      console.log(err.response);
+      
       setLoading(false);
       alert("E-mail ou senha incorretos. Tente novamente.");
     });

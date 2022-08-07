@@ -12,7 +12,8 @@ function postLogin(body) {
   return promise;
 }
 
-function postCreatHabit(body) {
+function postCreateHabit
+(body) {
   const config = createHeaders();
   const promise = axios.post(`${BASE_URL}/habits`, body, config);
   return promise;
@@ -24,9 +25,9 @@ function getListHabits() {
   return promise;
 }
 
-function getDeletHabit(habitId) {
+function deleteHabit(habitId) {
   const config = createHeaders();
-  const promise = axios.get(`${BASE_URL}/habits/${habitId}`, config);
+  const promise = axios.delete(`${BASE_URL}/habits/${habitId}`, config);
   return promise;
 }
 function getTodaytHabits() {
@@ -66,9 +67,10 @@ function createHeaders() {
 export {
   postRegistration,
   postLogin,
-  postCreatHabit,
+  postCreateHabit
+,
   getListHabits,
-  getDeletHabit,
+  deleteHabit,
   getTodaytHabits,
   postHabitDone,
   postHabitUndone,

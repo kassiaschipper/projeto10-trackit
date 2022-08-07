@@ -6,14 +6,20 @@ import Habits from "./habits/Habits";
 import Today from "./today/Today";
 import History from "./history/History";
 import PrivatePage from "./privatePage/PrivatePage";
+import UserContext from "../context/UserContext";
+import { useState } from "react";
 
 
 export default function App() {
+  // const [name, setName] = useState({Tname: ''})
 
-    return (
+    
+  return (
     <>
       <GlobalStyle />
+      
       <BrowserRouter>
+      <UserContext.Provider value={{ }}>
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/cadastro" element={<Registration />} />
@@ -21,7 +27,9 @@ export default function App() {
           <Route path="/habitos" element={<PrivatePage><Habits /></PrivatePage>}/>
           <Route path="/historico" element={<PrivatePage><History /></PrivatePage>}/>
         </Routes>
+        </UserContext.Provider>
       </BrowserRouter>
+      
     </>
   );
 }
