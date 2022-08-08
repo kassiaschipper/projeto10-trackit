@@ -59,6 +59,7 @@ const HabitWrapper = styled.div`
   background-color: #ffffff;
   border: 1px solid #d5d5d5;
   border-radius: 5px;
+  margin:0 2% 2% 5%;
 
   font-family: "Lexend Deca";
   font-style: normal;
@@ -79,21 +80,6 @@ const HabitWrapper = styled.div`
     top: 15px;
     left: 0;
   }
-
-  /* li {
-    width: 30px;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #d5d5d5;
-    border-radius: 5px;
-    font-family: "Lexend Deca";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 19.976px;
-    line-height: 25px;
-  } */
 
   span {
     display: flex;

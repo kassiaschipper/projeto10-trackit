@@ -11,7 +11,7 @@ import { useState } from "react";
 
 export default function App() {
   const [habits, setHabits] = useState([]);
-  const [percentage, setPercentage] = useState();
+  const [percentage, setPercentage] = useState(0);
 
 
   return (

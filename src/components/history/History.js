@@ -28,7 +28,7 @@ const ContainerWrapper = styled.div`
 
     span {
       position: relative;
-      bottom: 240px;
+      bottom: 40%;
       left: 5%;
       font-family: "Lexend Deca";
       font-style: normal;

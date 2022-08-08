@@ -7,7 +7,8 @@ import UserContext from "../../context/UserContext";
 
 export default function Footer({}) {
    const { percentage, setPercentage } = useContext(UserContext);
-  return (
+  
+   return (
     <ContainerWrapper>
       <Link to="/habitos" >
         <span>Hábitos</span>

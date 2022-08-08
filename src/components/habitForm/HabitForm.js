@@ -6,6 +6,7 @@ import DayItem from "./DayItem";
 export default function HabitForm({ setShowHabitBox, handleGetHabits }) {
   const [name, setName] = useState("");  
   const [days, setDays] = useState([]);
+  
 
 
   function handleForm(event) {
@@ -101,6 +102,7 @@ const FormWrapped = styled.body`
     background-color: white;
     border-radius: 5px;
     margin: 18px auto 0 auto;
+    
   }
 
   input {
@@ -147,7 +149,7 @@ const FormWrapped = styled.body`
 const Wrapper = styled.div`
   width: 400px;
   height: 400px;
-`;
+  `;
 
 const Button = styled.span`
   width: 100%;

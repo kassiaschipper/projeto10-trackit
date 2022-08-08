@@ -1,26 +1,32 @@
 import styled from "styled-components";
 import UserContext from "../../context/UserContext";
-import { useContext  } from "react";
+import { useContext, useEffect  } from "react";
 
 export default function Message({ todayHabits }) {
   const { percentage, setPercentage } = useContext(UserContext);
 
+  useEffect(() => {
+    calculatePercentage();
+  }, );
+
+
+  const todayHabitsLength = todayHabits.length;
   function calculatePercentage() {
-    const todayHabitsLength = todayHabits.length;
+    console.log('twstw');
     let done = todayHabits.filter((value) => value.done).length;
  
     setPercentage((done / todayHabitsLength) * 100);
   }
 
   if (percentage === 0) {
-    calculatePercentage();
+    
     return (
       <P>
         <p>Nenhum hábito concluído ainda</p>
       </P>
     );
   } else {
-    calculatePercentage();
+    
     return (
       <Percentage>
         <p>{percentage}% dos hábitos concluídos</p>
@@ -31,8 +37,8 @@ export default function Message({ todayHabits }) {
 
 const Percentage = styled.div`
   p {
-    position: relative;
-    bottom: 280px;
+    position: fixed;
+    bottom: 80%;
     left: 5%;
     font-family: "Lexend Deca";
     font-style: normal;
@@ -46,8 +52,8 @@ const Percentage = styled.div`
 
 const P = styled.div`
   p {
-    position: relative;
-    bottom: 280px;
+    position: fixed;
+    bottom: 80%;
     left: 5%;
     font-family: "Lexend Deca";
     font-style: normal;

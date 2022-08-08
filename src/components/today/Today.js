@@ -8,8 +8,7 @@ import Message from "./Message";
 
 export default function Today() {
   const [todayHabits, setTodayHabits] = useState([]);
-  const { percentage, setPercentage } = useContext(UserContext);
-
+  
   useEffect(() => {
     handleTodayHabits();
   }, []);
@@ -41,7 +40,7 @@ export default function Today() {
           {dayNames[dayjs().day()]}, {dayjs().format("DD/MM")}
         </h1>
       </Title>
-      <Message todayHabits={todayHabits} />
+      <Message todayHabits={todayHabits} />       
       {todayHabits.map((value) => (
         <TodayHabit todayHabit={value} handleTodayHabits={handleTodayHabits} />
       ))}
@@ -60,8 +59,9 @@ const Wrapper = styled.div`
   top: 70px;
 `;
 const Title = styled.div`
-  position: relative;
-  bottom: 300px;
+  position: fixed;
+  bottom: 85%;
+  
   left: 5%;
   width: 100%;
   font-family: "Lexend Deca";

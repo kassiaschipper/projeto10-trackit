@@ -60,6 +60,7 @@ const Wrapper = styled.div`
     * {
       box-sizing: border-box;
     }
+    
   }
 `;
 const Box = styled.div`
@@ -69,7 +70,7 @@ const Box = styled.div`
   width: 380px;
   height: 100px;
   left: 18px;
-  bottom: 250px;
+  bottom: 200px;
   justify-content: space-between;
   padding-right: 5%;
   padding-top: 4%;

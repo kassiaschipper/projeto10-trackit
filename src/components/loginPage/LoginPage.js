@@ -20,18 +20,14 @@ export default function LoginPage() {
     };
 
     postLogin(body).then((response) => {
-     
-   
       const token = response.data.token;
       const image = response.data.image;
       const authJSON = JSON.stringify({ token: token, image: image });
-      localStorage.setItem('trackit', authJSON);
-   
+      localStorage.setItem("trackit", authJSON);
+
       navigate("/hoje");
-          
-    })
+    });
     postLogin(body).catch((err) => {
-      
       setLoading(false);
       alert("E-mail ou senha incorretos. Tente novamente.");
     });
@@ -50,7 +46,7 @@ export default function LoginPage() {
             placeholder="email"
             type="email"
             value={email}
-            disabled={loading === false ? false : true}
+            disabled={loading ? true : false}
             onChange={(e) => setEmail(e.target.value)}
             required
           ></input>
@@ -65,11 +61,14 @@ export default function LoginPage() {
             required
           ></input>
 
-          <button  disabled={loading === false ? false : true} type="submit"> {loading ? (
-                            <ThreeDots color="#FFFFFF" height={13} aling="center" />
-                        ) : (
-                            'Entrar'
-                        )}</button>
+          <button disabled={loading === false ? false : true} type="submit">
+            {" "}
+            {loading ? (
+              <ThreeDots width="100%"  color="#FFFFFF" height={13} aling="center" />
+            ) : (
+              "Entrar"
+            )}
+          </button>
           <span onClick={() => navigate("/cadastro")}>
             Não tem uma conta? Cadastre-se!
           </span>
@@ -84,7 +83,7 @@ const Content = styled.div`
     * {
       box-sizing: border-box;
     }
-
+    margin: 0 auto;
     form {
       display: flex;
       flex-direction: column;

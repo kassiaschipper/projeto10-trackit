@@ -37,7 +37,7 @@ const HeaderWrapper = styled.div`
     img {
         clip-path: circle();
         width: 61px;
-        margin-right: 18px;
+        margin-right: 30px;
     }
 }
 `;
