@@ -7,16 +7,10 @@ import { getListHabits, deleteHabit } from "../../services/trackIt";
 import HabitItem from "./HabitItem";
 import UserContext from "../../context/UserContext";
 
-
 export default function Habits() {
-  // const [habits, setHabits] = useState([]);
-  const {habits, setHabits}  = useContext(UserContext);
+  const { habits, setHabits } = useContext(UserContext);
   const [showHabitBox, setShowHabitBox] = useState(false);
-  // const {newHabits, setNewHabits} = useContext(UserContext);
-  
- 
-  // console.log(habits)
-  
+
   useEffect(() => {
     handleGetHabits();
   }, []);
@@ -24,11 +18,7 @@ export default function Habits() {
   function handleGetHabits() {
     getListHabits()
       .then((response) => {
- 
         setHabits(response.data);
-        console.log(response.data)
-        // setNewHabits(...response.data, response.data);
-        // console.log(newHabits)
       })
       .catch((err) => {
         alert("Erro ao listar hábitos");
@@ -36,11 +26,9 @@ export default function Habits() {
   }
 
   function habitDelete(habitId) {
-    
-      deleteHabit(habitId).then(() => {
-        handleGetHabits();
-      });
-    
+    deleteHabit(habitId).then(() => {
+      handleGetHabits();
+    });
   }
 
   return (

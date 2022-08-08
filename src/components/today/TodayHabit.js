@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
 import { postHabitDone } from "../../services/trackIt";
 import { postHabitUndone } from "../../services/trackIt";
+import UserContext from "../../context/UserContext";
 
 export default function TodayHabit({ todayHabit, handleTodayHabits }) {
   const [check, setCheck] = useState(todayHabit.done);
-  
+
   function checkHabit(habit) {
     setCheck(!check);
 
@@ -13,9 +14,6 @@ export default function TodayHabit({ todayHabit, handleTodayHabits }) {
       postHabitUndone(habit.id)
         .then((response) => {
           handleTodayHabits();
-          
-          console.log(response.data);
-         
         })
         .catch((err) => {
           alert("Não foi possível registrar atividade");
@@ -23,9 +21,7 @@ export default function TodayHabit({ todayHabit, handleTodayHabits }) {
     } else {
       postHabitDone(habit.id)
         .then((response) => {
-          handleTodayHabits();      
-          console.log(response.data);
-      
+          handleTodayHabits();
         })
         .catch((err) => {
           alert("Não foi possível registrar atividade");
@@ -33,13 +29,22 @@ export default function TodayHabit({ todayHabit, handleTodayHabits }) {
     }
   }
 
+  let sequence = todayHabit.currentSequence;
+  let record = todayHabit.highestSequence;
+
   return (
     <Wrapper>
       <Box check={check}>
         <div>
-          <span>{todayHabit.name} </span>
-          <p>Sequência atual: {todayHabit.currentSequence} dias</p>
-          <p>Seu recorde: {todayHabit.highestSequence} dias</p>
+          <h3>{todayHabit.name} </h3>
+          <p>
+            Sequência atual: <span>{sequence} dias</span>
+          </p>
+          <Record check={check} sameValue={sequence === record}>
+            <p>
+              Seu recorde: <span>{record} dias </span>
+            </p>
+          </Record>
         </div>
         <p onClick={() => checkHabit(todayHabit)}>
           {" "}
@@ -60,7 +65,6 @@ const Wrapper = styled.div`
 const Box = styled.div`
   display: flex;
   flex-wrap: wrap;
-  background-color: yellow;
   position: relative;
   width: 380px;
   height: 100px;
@@ -75,7 +79,7 @@ const Box = styled.div`
   margin-bottom: 10px;
   padding-left: 5%;
 
-  span {
+  h3 {
     font-family: "Lexend Deca";
     font-style: normal;
     font-weight: 400;
@@ -83,11 +87,21 @@ const Box = styled.div`
     line-height: 25px;
     color: #666666;
   }
+  span {
+    color: ${(props) => (props.check ? "#8FC549" : "#666666")};
+  }
 
   p {
     position: relative;
     top: 5px;
     left: 0;
+    font-family: "Lexend Deca";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12.976px;
+    line-height: 16px;
+
+    color: #666666;
   }
 
   ion-icon {
@@ -100,5 +114,18 @@ const Box = styled.div`
     position: relative;
     bottom: 10%;
     left: 4%;
+  }
+`;
+
+const Record = styled.span`
+  span {
+    color: ${(props) =>
+      props.sameValue && props.check ? "#8FC549" : "#666666"};
+  }
+
+  p {
+    position: relative;
+    top: 5px;
+    left: 0;
   }
 `;
