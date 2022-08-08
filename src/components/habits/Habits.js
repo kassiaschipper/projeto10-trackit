@@ -1,16 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import HabitForm from "../habitForm/HabitForm";
 import { getListHabits, deleteHabit } from "../../services/trackIt";
 import HabitItem from "./HabitItem";
+import UserContext from "../../context/UserContext";
+
 
 export default function Habits() {
-  const [habits, setHabits] = useState([]);
+  // const [habits, setHabits] = useState([]);
+  const {habits, setHabits}  = useContext(UserContext);
   const [showHabitBox, setShowHabitBox] = useState(false);
-  //const [renderHabit, setRenderHabit] = useState(true);
-
+  // const {newHabits, setNewHabits} = useContext(UserContext);
+  
+ 
+  // console.log(habits)
+  
   useEffect(() => {
     handleGetHabits();
   }, []);
@@ -20,7 +26,9 @@ export default function Habits() {
       .then((response) => {
  
         setHabits(response.data);
-        //renderHabit
+        console.log(response.data)
+        // setNewHabits(...response.data, response.data);
+        // console.log(newHabits)
       })
       .catch((err) => {
         alert("Erro ao listar hábitos");

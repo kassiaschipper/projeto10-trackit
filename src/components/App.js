@@ -9,27 +9,46 @@ import PrivatePage from "./privatePage/PrivatePage";
 import UserContext from "../context/UserContext";
 import { useState } from "react";
 
-
 export default function App() {
-  // const [name, setName] = useState({Tname: ''})
+  // const [newHabits, setNewHabits] = useState([{}]);
+  const [habits, setHabits] = useState([]);
 
-    
   return (
     <>
       <GlobalStyle />
-      
+
       <BrowserRouter>
-      <UserContext.Provider value={{ }}>
-        <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/cadastro" element={<Registration />} />
-          <Route path="/hoje" element={<PrivatePage><Today /></PrivatePage>}/>
-          <Route path="/habitos" element={<PrivatePage><Habits /></PrivatePage>}/>
-          <Route path="/historico" element={<PrivatePage><History /></PrivatePage>}/>
-        </Routes>
+        <UserContext.Provider value={{ habits, setHabits }}>
+          <Routes>
+            <Route path="/" element={<LoginPage />} />
+            <Route path="/cadastro" element={<Registration />} />
+            <Route
+              path="/hoje"
+              element={
+                <PrivatePage>
+                  <Today />
+                </PrivatePage>
+              }
+            />
+            <Route
+              path="/habitos"
+              element={
+                <PrivatePage>
+                  <Habits />
+                </PrivatePage>
+              }
+            />
+            <Route
+              path="/historico"
+              element={
+                <PrivatePage>
+                  <History />
+                </PrivatePage>
+              }
+            />
+          </Routes>
         </UserContext.Provider>
       </BrowserRouter>
-      
     </>
   );
 }

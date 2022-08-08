@@ -1,13 +1,17 @@
 import { useState, useContext } from "react";
-// import  UserContext from "../../context/UserContext"
+import  UserContext from "../../context/UserContext"
 import styled from "styled-components";
 import { postCreateHabit } from "../../services/trackIt";
 import DayItem from "./DayItem";
 
 export default function HabitForm({ setShowHabitBox, handleGetHabits }) {
   const [name, setName] = useState("");
-  //   const { name, setName } = useContext(UserContext);
+  
   const [days, setDays] = useState([]);
+
+
+
+
 
   function handleForm(event) {
     event.preventDefault();
@@ -19,7 +23,7 @@ export default function HabitForm({ setShowHabitBox, handleGetHabits }) {
       name,
       days,
     };
- 
+
 
     postCreateHabit(body)
       .then((response) => {
