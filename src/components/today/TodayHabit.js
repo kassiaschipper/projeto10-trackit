@@ -1,8 +1,8 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { postHabitDone } from "../../services/trackIt";
 import { postHabitUndone } from "../../services/trackIt";
-import UserContext from "../../context/UserContext";
+
 
 export default function TodayHabit({ todayHabit, handleTodayHabits }) {
   const [check, setCheck] = useState(todayHabit.done);

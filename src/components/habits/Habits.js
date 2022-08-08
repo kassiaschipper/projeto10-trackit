@@ -1,6 +1,5 @@
 import { useEffect, useState, useContext } from "react";
 import { ThreeDots } from "react-loader-spinner";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import HabitForm from "../habitForm/HabitForm";
 import { getListHabits, deleteHabit } from "../../services/trackIt";

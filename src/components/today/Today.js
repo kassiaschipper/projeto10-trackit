@@ -18,8 +18,7 @@ export default function Today() {
     getTodaytHabits()
       .then((response) => {
         setTodayHabits(response.data);
-        console.log(response.data);
-      })
+    })
       .catch((err) => {
         alert("Erro ao listar hábitos");
       });

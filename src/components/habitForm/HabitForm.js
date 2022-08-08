@@ -1,5 +1,4 @@
 import { useState, useContext } from "react";
-import  UserContext from "../../context/UserContext"
 import styled from "styled-components";
 import { postCreateHabit } from "../../services/trackIt";
 import DayItem from "./DayItem";
@@ -7,9 +6,6 @@ import DayItem from "./DayItem";
 export default function HabitForm({ setShowHabitBox, handleGetHabits }) {
   const [name, setName] = useState("");  
   const [days, setDays] = useState([]);
-
-
-
 
 
   function handleForm(event) {
@@ -29,7 +25,7 @@ export default function HabitForm({ setShowHabitBox, handleGetHabits }) {
    
         setShowHabitBox(false);
         handleGetHabits();
-        //renderHabit
+      
       })
       .catch((err) => {
         alert("Erro ao incluir hábito");

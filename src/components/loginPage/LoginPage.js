@@ -27,9 +27,8 @@ export default function LoginPage() {
       const authJSON = JSON.stringify({ token: token, image: image });
       localStorage.setItem('trackit', authJSON);
    
-      //navigate("/hoje");
-      
-      navigate("/habitos")
+      navigate("/hoje");
+          
     })
     postLogin(body).catch((err) => {
       

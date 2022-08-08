@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import UserContext from "../../context/UserContext";
-import { useContext, useEffect } from "react";
+import { useContext  } from "react";
 
 export default function Message({ todayHabits }) {
   const { percentage, setPercentage } = useContext(UserContext);
@@ -8,7 +8,7 @@ export default function Message({ todayHabits }) {
   function calculatePercentage() {
     const todayHabitsLength = todayHabits.length;
     let done = todayHabits.filter((value) => value.done).length;
-    console.log(done);
+ 
     setPercentage((done / todayHabitsLength) * 100);
   }
 

@@ -11,8 +11,6 @@ export default function HabitItem({ item, habitId, onDelete }) {
     }
   }
 
-
-
   return (
     <HabitWrapper>
       <>
