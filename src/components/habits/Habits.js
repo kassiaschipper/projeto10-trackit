@@ -74,7 +74,7 @@ export default function Habits() {
 }
 
 const ContainerWrapper = styled.body`
-  @media (max-width: 614px) {
+  @media (max-width: 414px) {
     * {
       box-sizing: border-box;
     }
@@ -87,7 +87,7 @@ const ContainerWrapper = styled.body`
   }
 `;
 const SubTitleWrapper = styled.div`
-  @media (max-width: 614px) {
+  @media (max-width: 414px) {
     * {
       box-sizing: border-box;
     }
@@ -132,7 +132,7 @@ const SubTitleWrapper = styled.div`
 `;
 
 const TextWrapper = styled.div`
-  @media (max-width: 614px) {
+  @media (max-width: 414px) {
     * {
       box-sizing: border-box;
     }

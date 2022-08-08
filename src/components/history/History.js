@@ -13,7 +13,7 @@ export default function History() {
 }
 
 const ContainerWrapper = styled.div`
-  @media (max-width: 614px) {
+  @media (max-width: 414px) {
     * {
       box-sizing: border-box;
     }
@@ -42,7 +42,7 @@ const ContainerWrapper = styled.div`
   }
 `;
 const SubTitleWrapper = styled.div`
-  @media (max-width: 614px) {
+  @media (max-width: 414px) {
     * {
       box-sizing: border-box;
     }

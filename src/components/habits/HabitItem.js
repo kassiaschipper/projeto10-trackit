@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import DayItem from "../habitForm/DayItem";
-import { deleteHabit } from "../../services/trackIt";
 
 export default function HabitItem({ item, habitId, onDelete }) {
   function habitDelete(habitId) {
@@ -47,7 +46,7 @@ export default function HabitItem({ item, habitId, onDelete }) {
             S
           </DayItem>
         </ul>
-        {/* <span>{item.days}</span> */}
+       
       </>
     </HabitWrapper>
   );

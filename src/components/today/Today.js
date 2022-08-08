@@ -1,14 +1,34 @@
 import dayjs from "dayjs";
 import styled from "styled-components";
-import UserContext from "../../context/UserContext";
-import { useContext } from "react";
+// import UserContext from "../../context/UserContext";
+import { useState, useEffect } from "react";
+import TodayHabit from "./TodayHabit";
+import { getTodaytHabits } from "../../services/trackIt";
 
 export default function Today() {
   // const {newHabits, setNewHabits} = useContext(UserContext);
-  const { habits, setHabits } = useContext(UserContext);
+//   const { habits, setHabits } = useContext(UserContext);
+  const [todayHabits, setTodayHabits ] = useState([]);
 
-  const habitsLength = habits.length;
-  console.log(habitsLength);
+  useEffect(() => {
+    handleTodayHabits();
+  }, []);
+
+  function handleTodayHabits() {
+    getTodaytHabits()
+      .then((response) => {
+        setTodayHabits(response.data);
+        console.log(response.data)
+   
+      })
+      .catch((err) => {
+        alert("Erro ao listar hábitos");
+      });
+  }
+
+
+  const habitsLength = todayHabits.length;
+  console.log(todayHabits);
 
   const dayNames = [
     "Domingo",
@@ -20,10 +40,6 @@ export default function Today() {
     "Sábado",
   ];
 
-  function RenderHabits() {
-    return <p>Nenhum hábito concluído ainda</p>;
-  }
-
   return (
     <Wrapper>
       <Title>
@@ -31,7 +47,9 @@ export default function Today() {
           {dayNames[dayjs().day()]}, {dayjs().format("DD/MM")}
         </h1>
       </Title>
-      {habitsLength === 0 ? <p>Nenhum hábito concluído ainda</p> : "teste"}
+      {habitsLength === 0 ? <p>Nenhum hábito concluído ainda</p> : todayHabits.map((value) => (
+          <TodayHabit todayHabit={value} handleTodayHabits={handleTodayHabits} />
+        ))}
     </Wrapper>
   );
 }
@@ -61,7 +79,7 @@ const Wrapper = styled.div`
 `;
 const Title = styled.div`
   position: relative;
-  bottom: 280px;
+  bottom: 300px;
   left: 5%;
   width: 100%;
   background-color: aqua;

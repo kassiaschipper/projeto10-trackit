@@ -41,7 +41,7 @@ export default function Footer({}) {
 
 const ContainerWrapper = styled.body`
   background-color: white;
-  @media (max-width: 614px) {
+  @media (max-width: 414px) {
     * {
       box-sizing: border-box;
     }

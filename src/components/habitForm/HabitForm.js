@@ -5,8 +5,7 @@ import { postCreateHabit } from "../../services/trackIt";
 import DayItem from "./DayItem";
 
 export default function HabitForm({ setShowHabitBox, handleGetHabits }) {
-  const [name, setName] = useState("");
-  
+  const [name, setName] = useState("");  
   const [days, setDays] = useState([]);
 
 

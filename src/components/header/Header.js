@@ -11,7 +11,7 @@ export default function Header({image}){
 }
 
 const HeaderWrapper = styled.div`
-     @media (max-width: 614px) {
+     @media (max-width: 414px) {
     * {
       box-sizing: border-box;
     }

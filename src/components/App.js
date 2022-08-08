@@ -12,13 +12,14 @@ import { useState } from "react";
 export default function App() {
   // const [newHabits, setNewHabits] = useState([{}]);
   const [habits, setHabits] = useState([]);
+  const [percentage, setPercentage] = useState([]);
 
   return (
     <>
       <GlobalStyle />
 
       <BrowserRouter>
-        <UserContext.Provider value={{ habits, setHabits }}>
+        <UserContext.Provider value={{ habits, setHabits, percentage, setPercentage }}>
           <Routes>
             <Route path="/" element={<LoginPage />} />
             <Route path="/cadastro" element={<Registration />} />
